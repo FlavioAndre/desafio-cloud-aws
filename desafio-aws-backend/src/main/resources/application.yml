@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: ${max_file_size}
+      max-request-size: ${max_file_size}
+com:
+  desafio:
+    jwt:
+      aws:
+        userPoolId: ${jwt_aws_userPoolId}
+        region: ${jwt_aws_region}
+        urlWellKnown: ${jwt_aws_urlWellKnown}
+        urlCognito: ${jwt_aws_urlCognito}
+    s3:
+      bucket: ${aws_s3_bucket}
+      accessKey: ${aws_s3_accessKey}
+      secretKey: ${aws_s3_secretKey}
+
+  amazon:
+    dynamodb:
+      endpoint: ${aws_dynamodb_endpoint}
+    aws:
+      region: ${aws_dynamodb_region}

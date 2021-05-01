@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+    app:
+        container_name: desafio-aws-amcom-app
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - '.:/app'
+            - '/app/node_modules'
+        ports:
+            - '3001:3000'
+        environment:
+            - NODE_ENV=development
+            - REACT_APP_USERPOOL_ID=us-east-1_tdXBraHgS
+            - REACT_APP_CLIENT_ID=26sl9n29u72n4qrlkibrme9sv4
