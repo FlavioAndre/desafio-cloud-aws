@@ -1,7 +1,7 @@
 {
   "name": "desafio-cloud-ams",
   "version": "2.0.0",
-  "description": "Desafio Cloud AWS Amcom.",
+  "description": "Desafio Cloud AWS.",
   "repository": {
     "type": "git",
     "url": "https://github.com/FlavioAndre/desafio-cloud-aws"

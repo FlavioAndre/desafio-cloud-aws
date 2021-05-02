@@ -44,6 +44,7 @@ Setup the Cognito environment values buy creating app/.env.local file and adding
 ```bash
 REACT_APP_USERPOOL_ID=YOUR_USER_POOL_ID
 REACT_APP_CLIENT_ID=YOUR_CLIENT_ID
+REACT_APP_BASE_URL=YOUR_BASE_URL
 ```
 
 Create React App has been used to setup the development process so the next steps should be familiar

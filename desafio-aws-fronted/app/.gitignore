@@ -26,3 +26,5 @@ app/.eslintcache
 
 /.vscode
 
+/.devcontainer
+

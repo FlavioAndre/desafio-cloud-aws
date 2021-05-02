@@ -44,7 +44,7 @@ const Landing: React.FunctionComponent = () => {
                 <GitHubIcon fontSize="large" />
               </Box>
               <Typography className={classes.title} variant="h3">
-                BootCamp AWS - AMcom
+                Bootcamp Cloud AWS
               </Typography>
             </Grid>
           </Link>

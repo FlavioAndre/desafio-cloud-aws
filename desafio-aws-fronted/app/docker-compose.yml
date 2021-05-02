@@ -9,8 +9,11 @@ services:
             - '.:/app'
             - '/app/node_modules'
         ports:
-            - '3001:3000'
+            - '3000:3000'
+        env_file:
+            - .env
         environment:
-            - NODE_ENV=development
-            - REACT_APP_USERPOOL_ID=us-east-1_tdXBraHgS
-            - REACT_APP_CLIENT_ID=26sl9n29u72n4qrlkibrme9sv4
+            - NODE_ENV=${NODE_ENV}
+            - REACT_APP_USERPOOL_ID=${REACT_APP_USERPOOL_ID}
+            - REACT_APP_CLIENT_ID=${REACT_APP_CLIENT_ID}
+            - REACT_APP_BASE_URL=${REACT_APP_BASE_URL}

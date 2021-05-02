@@ -219,7 +219,7 @@ export default function Home() {
         FileSaver.saveAs(bb, file)
       })
       .catch((e) => {
-        showMessage("Error na chmada da Api.", severityError);
+        showMessage("Error na chamada da Api.", severityError);
          console.log(e)
       }).finally(() => stopProgress());
   }
@@ -236,7 +236,7 @@ export default function Home() {
         console.log(response);
       })
       .catch((e) => {
-        showMessage("Error na chmada da Api.", severityError);
+        showMessage("Error na chamada da Api.", severityError);
         console.log(e);
       }).finally(() => stopProgress());
   }
@@ -265,7 +265,7 @@ export default function Home() {
         
       })
       .catch((e) => {
-        showMessage("Error na chmada da Api.", severityError);
+        showMessage("Error na chamada da Api.", severityError);
         console.log(e)
       })
       .finally(() => stopProgress())
@@ -282,7 +282,7 @@ export default function Home() {
         console.log(response.data)
       })
       .catch((e) => {
-        showMessage("Error na chmada da Api.", severityError);
+        showMessage("Error na chamada da Api.", severityError);
         console.log(e)
       })
       .finally(() => stopProgress())
@@ -491,7 +491,7 @@ export default function Home() {
                     <GitHubIcon fontSize="large" />
                   </Box>
                   <Typography className={classes.title} variant="h3">
-                    Bootcamp Cloud AWS - AMcom
+                    Bootcamp Cloud AWS
                   </Typography>
                 </Grid>
               </Link>

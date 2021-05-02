@@ -75,7 +75,7 @@ export default function Home() {
                     <GitHubIcon fontSize="large" />
                   </Box>
                   <Typography className={classes.title} variant="h3">
-                    BootCamp AWS - AMcom
+                    Bootcamp Cloud AWS
                   </Typography>
                 </Grid>
               </Link>
