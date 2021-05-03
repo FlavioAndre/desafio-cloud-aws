@@ -1,17 +1,12 @@
-# Imagem de Origem
-FROM node:14.16.1-alpine3.10
+FROM node:alpine as build
 
-# Diretório de trabalho(é onde a aplicação ficará dentro do container).
 WORKDIR /app
+COPY . .
+RUN yarn
+RUN yarn build
 
-# Adicionando `/app/node_modules/.bin` para o $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# Instalando dependências da aplicação e armazenando em cache.
-COPY package.json /app/package.json
-
-RUN npm install --silent
-RUN npm install react-scripts@4.0.3 -g --silent
-
-# Inicializa a aplicação
-CMD ["npm", "start"]
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
