@@ -1,3 +1,6 @@
 desafio-aws-fronted/app/src/.devcontainer/devcontainer.env
 desafio-aws-fronted/app/.env
 desafio-aws-fronted/app/.local
+
+.devcontainer
+.devcontainer/devcontainer.json
