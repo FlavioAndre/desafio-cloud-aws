@@ -20,6 +20,7 @@ COPY package-lock.json ./
 #RUN yarn add @types/file-saver
 #RUN yarn build
 
+RUN npm install @types/file-saver
 RUN npm ci --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 COPY . ./
