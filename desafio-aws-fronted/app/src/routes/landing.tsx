@@ -38,7 +38,7 @@ const Landing: React.FunctionComponent = () => {
           <img src={logoImage} width={224} height={224} alt="logo" />
         </Box>
         <Box m={2}>
-          <Link underline="none" color="inherit" href="https://github.com/FlavioAndre/desafio-cloud-aws">
+          <Link rel="noopener" target="_blank" underline="none" color="inherit" href="https://github.com/FlavioAndre/desafio-cloud-aws">
             <Grid container direction="row" justify="center" alignItems="center">
               <Box mr={3}>
                 <GitHubIcon fontSize="large" />

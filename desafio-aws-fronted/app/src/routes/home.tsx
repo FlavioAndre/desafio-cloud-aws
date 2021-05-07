@@ -9,7 +9,6 @@ import Box from '@material-ui/core/Box'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Backdrop from '@material-ui/core/Backdrop'
@@ -43,6 +42,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import GitHubIcon from '@material-ui/icons/GitHub'
+import NavigateBefore from '@material-ui/icons/NavigateBefore'
+import NavigateNext from '@material-ui/icons/NavigateNext'
+import Refresh from '@material-ui/icons/Refresh'
+
 import Link from '@material-ui/core/Link'
 
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
@@ -64,8 +67,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     fab: {
       position: 'absolute',
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
+      bottom: theme.spacing(4),
+      right: theme.spacing(4),
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
@@ -162,7 +165,7 @@ export default function Home() {
 
   const [isNextToken, setIsNextToken] = React.useState(false);
 
-  const [isFirst, setIsFirst] =  React.useState(true);
+  const [pagina, setPagina] =  React.useState(0);
 
 
   function signOutClicked() {
@@ -232,8 +235,8 @@ export default function Home() {
     DesafioAwsService.deleteFile(file)
       .then((response) => {
         showMessage("Arquivo excluído com sucesso!", severitySuccess);
+        setPagina(0);
         loadFiles();
-        console.log(response);
       })
       .catch((e) => {
         showMessage("Error na chamada da Api.", severityError);
@@ -241,11 +244,10 @@ export default function Home() {
       }).finally(() => stopProgress());
   }
 
-  const validateIsFirst = () => {
-    if(sizeStack() === 0) return true;
-    return false;
+  const refresh = () => {
+    setPagina(0);
+    loadFiles();
   }
-
 
   const loadFiles = (nextContinuationToken?: any, isBack?: boolean) => {
     startProgress();
@@ -255,11 +257,10 @@ export default function Home() {
           setPrevToken(nextToken);
           setIsNextToken(response.data.isTruncated);
           if(response.data.isTruncated) {
-            setIsFirst(validateIsFirst());
             if(!isBack) stack.push(nextContinuationToken);
             setNextToken(response.data.nextContinuationToken);
           }
-          console.log('nextContinuationToken: ', response.data.nextContinuationToken);
+
           setFilesS3(response.data.files)
         }
         
@@ -268,7 +269,9 @@ export default function Home() {
         showMessage("Error na chamada da Api.", severityError);
         console.log(e)
       })
-      .finally(() => stopProgress())
+      .finally(() => {
+         stopProgress();
+      })
   }
 
   const severitySuccess = "success";
@@ -279,7 +282,6 @@ export default function Home() {
     DesafioAwsService.requestInteration(email)
       .then((response) => {
         showMessage(response.data, severitySuccess);
-        console.log(response.data)
       })
       .catch((e) => {
         showMessage("Error na chamada da Api.", severityError);
@@ -323,10 +325,12 @@ export default function Home() {
   }
 
   const proximo = () => {
+    setPagina(pagina + 1);
     loadFiles(nextToken, false);
   }
 
   const anterior = () => {
+    setPagina(pagina - 1);
     let currentToken = stack.pop();
     if(currentToken === prevToken) currentToken = stack.pop();
     loadFiles(currentToken, sizeStack() > 0);
@@ -473,6 +477,7 @@ export default function Home() {
               setOpen(false)
               DesafioAwsService.upload(files[0]).finally(() => {
                 stopProgress()
+                setPagina(0)
                 loadFiles()
               })
             }}
@@ -485,7 +490,7 @@ export default function Home() {
         
       <Grid className={classes.root} container direction="column" justify="center" alignItems="center" spacing={3}>
       <Box m={2}>
-              <Link underline="none" color="inherit" href="https://github.com/FlavioAndre/desafio-cloud-aws">
+              <Link rel="noopener" target="_blank" underline="none" color="inherit" href="https://github.com/FlavioAndre/desafio-cloud-aws">
                 <Grid container direction="row" justify="center" alignItems="center">
                   <Box mr={3}>
                     <GitHubIcon fontSize="large" />
@@ -505,7 +510,7 @@ export default function Home() {
                 <TableCell>Arquivo</TableCell>
                 <TableCell align="center">Atualização</TableCell>
                 <TableCell align="right">Bytes</TableCell>
-                <Fab aria-label="Upload" className="classes.fab" color="secondary" onClick={showUpload}>
+                <Fab aria-label="Upload" className="classes.fab" color="secondary"  size="small" onClick={showUpload}>
                   <AddIcon />
                 </Fab>
               </TableRow>
@@ -532,12 +537,16 @@ export default function Home() {
           </Table>
           
           <Box mr={10} p={1} color="primary.main">
-          <Button  variant="contained" color="primary" onClick={anterior} disabled={isFirst} >
-                Anterior
-          </Button>
-          <Button  variant="contained" color="primary" onClick={proximo} disabled={!isNextToken}>
-                Próximo
-          </Button>
+          <IconButton  onClick={anterior} disabled={pagina===0}>
+                <NavigateBefore/>
+          </IconButton>
+          <IconButton  onClick={refresh} >
+                <Refresh/>
+          </IconButton>
+          <IconButton  onClick={proximo} disabled={!isNextToken}>
+                <NavigateNext/>
+          </IconButton>
+
         </Box>
         </Box>
        
