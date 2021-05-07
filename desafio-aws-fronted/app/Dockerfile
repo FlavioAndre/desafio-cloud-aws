@@ -11,20 +11,11 @@ ENV REACT_APP_BASE_URL=$REACT_APP_BASE_URL
 ENV NODE_ENV=$NODE_ENV
 
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-COPY package.json ./
-COPY package-lock.json ./
-
-#COPY . .
-#RUN yarn
-#RUN yarn add @types/file-saver
-#RUN yarn build
-
-RUN npm ci --silent
-RUN npm install react-scripts@3.4.1 -g --silent
-COPY . ./
-RUN npm install @types/file-saver
-RUN npm run build
+COPY . .
+RUN yarn
+RUN yarn add @react-workspaces/react-scripts
+RUN yarn add @types/file-saver
+RUN yarn build
 
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
