@@ -13,6 +13,7 @@ ENV NODE_ENV=$NODE_ENV
 WORKDIR /app
 COPY . .
 RUN yarn
+RUN yarn add @types/file-saver
 RUN yarn build
 
 FROM nginx:stable-alpine
