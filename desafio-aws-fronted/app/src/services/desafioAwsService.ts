@@ -10,6 +10,9 @@ class DesafioAwsService {
     return http.post("/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Authorization', 
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
         'Authorization': `${window.localStorage.getItem('accessToken')}`,
       },
     });
@@ -22,6 +25,9 @@ class DesafioAwsService {
 
     return http.get("/download",{
       headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Authorization', 
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
         'Authorization': `${window.localStorage.getItem('accessToken')}`,
       },
       responseType: 'arraybuffer', 
@@ -37,6 +43,9 @@ class DesafioAwsService {
         params,
         headers: {
           "Content-type": "application/json",
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Authorization', 
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
           'Authorization': `${window.localStorage.getItem('accessToken')}`
         }
       });
@@ -50,6 +59,9 @@ class DesafioAwsService {
     return http.get("/iteracoes",{
       params,
       headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Authorization', 
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
         'Authorization': `${window.localStorage.getItem('accessToken')}`,
       },
       
@@ -64,6 +76,9 @@ class DesafioAwsService {
     return http.delete("/delete",{
       params,
       headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Authorization', 
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
         'Authorization': `${window.localStorage.getItem('accessToken')}`,
       },
       
