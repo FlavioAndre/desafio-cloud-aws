@@ -13,7 +13,7 @@ ENV NODE_ENV=$NODE_ENV
 WORKDIR /app
 COPY . .
 RUN yarn install
-#RUN yarn add @types/file-saver
+RUN yarn add @types/file-saver
 RUN yarn build
 RUN rm -rf src/
 
