@@ -39,15 +39,15 @@ class DesafioAwsService {
     const params = {
       nextContinuationToken: nextContinuationToken
     };
-    return http.get("/list",{
-        params,
+    return http.get("/listAll",{
         headers: {
           "Content-type": "application/json",
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Headers': 'Authorization', 
           'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
           'Authorization': `${window.localStorage.getItem('accessToken')}`
-        }
+        },
+        params
       });
   }
 

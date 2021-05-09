@@ -57,7 +57,7 @@ public class DesafioAwsController {
         return messageSource.getMessage("saudacao", new Object[]{username}, Locale.US);
     }
 
-    @GetMapping(path = "/api/list")
+    @GetMapping(path = "/api/listAll")
     public Map<String, Object> getFiles(@RequestParam(name="nextContinuationToken", required = false) final Optional<String> nextContinuationToken) {
         return awss3Service.listFiles(nextContinuationToken.isPresent() ? nextContinuationToken.get() : null);
     }
