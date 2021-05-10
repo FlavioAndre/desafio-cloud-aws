@@ -5,7 +5,7 @@
 
 # desafio-aws-backend
 
-![signin](./logo.png)
+![signin](logo.png)
 ## Configuração de ambiente
 
 Antes de rodar a aplicação é necessário configurar as seguintes vaviáveis de ambiente:
