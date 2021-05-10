@@ -5,6 +5,8 @@
 
 # desafio-aws-fronted
 
+![signin](./logo.png)
+
 ## Configuração de ambiente
 
 Antes de rodar a aplicação é necessário configuras as seguintes vaviáveis de ambiente:
