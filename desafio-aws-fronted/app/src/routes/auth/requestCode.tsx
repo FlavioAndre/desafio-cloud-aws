@@ -44,7 +44,7 @@ export default function RequestCode() {
       await authContext.sendCode(username)
       setResetSent(true)
     } catch (err) {
-      setError('Unknown user')
+      setError('Usuário desconhecido')
     }
   }
 

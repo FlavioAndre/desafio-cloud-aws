@@ -41,7 +41,7 @@ const VerifyCode: React.FunctionComponent<{}> = () => {
       await authContext.verifyCode(username, code)
       history.push('signin')
     } catch (err) {
-      setError('Invalid Code')
+      setError('Código inválido')
     }
   }
 
@@ -56,7 +56,7 @@ const VerifyCode: React.FunctionComponent<{}> = () => {
           <Grid container direction="column" justify="center" alignItems="center">
             {/* Title */}
             <Box m={2}>
-              <Typography variant="h3">Send Code</Typography>
+              <Typography variant="h3">Enviar Código</Typography>
             </Box>
 
             {/* Sign In Form */}
@@ -69,7 +69,7 @@ const VerifyCode: React.FunctionComponent<{}> = () => {
               <Grid container direction="row" justify="flex-start" alignItems="center">
                 <Box onClick={passwordResetClicked} mt={2}>
                   <Typography className={classes.hover} variant="body2">
-                    Resend Code
+                    Reenviar código
                   </Typography>
                   <Box mt={2}>
                     <Typography color="error" variant="body2">
@@ -85,12 +85,12 @@ const VerifyCode: React.FunctionComponent<{}> = () => {
               <Grid container direction="row" justify="center">
                 <Box m={1}>
                   <Button color="secondary" variant="contained" onClick={() => history.goBack()}>
-                    Cancel
+                    Cancelar
                   </Button>
                 </Box>
                 <Box m={1}>
                   <Button disabled={isValid} color="primary" variant="contained" onClick={sendClicked}>
-                    Send
+                    Enviar
                   </Button>
                 </Box>
               </Grid>

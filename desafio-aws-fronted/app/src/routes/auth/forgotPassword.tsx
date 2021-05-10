@@ -85,12 +85,12 @@ export default function ForgotPassword() {
         <Grid container direction="row" justify="center">
           <Box m={1}>
             <Button onClick={() => history.goBack()} color="secondary" variant="contained">
-              Cancel
+              Cancelar
             </Button>
           </Box>
           <Box m={1}>
             <Button disabled={isValid} color="primary" variant="contained" onClick={resetPassword}>
-              Change Password
+              Alterar Senha
             </Button>
           </Box>
         </Grid>
@@ -100,7 +100,7 @@ export default function ForgotPassword() {
 
   const passwordReset = (
     <>
-      <Typography variant="h5">{`Password Reset`}</Typography>
+      <Typography variant="h5">{`Senha alterada`}</Typography>
 
       <Box m={4}>
         <Button onClick={() => history.push('/signin')} color="primary" variant="contained">
@@ -118,7 +118,7 @@ export default function ForgotPassword() {
             {/* Title */}
             <Box m={3}>
               <Grid container direction="row" justify="center" alignItems="center">
-                <Typography variant="h3">Forgot Password</Typography>
+                <Typography variant="h3">Esqueci da Senha</Typography>
               </Grid>
             </Box>
 
