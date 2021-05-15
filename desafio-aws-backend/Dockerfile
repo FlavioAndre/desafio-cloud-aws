@@ -14,7 +14,7 @@ WORKDIR application
 RUN java -Djarmode=layertools -jar application.jar extract
 RUN rm -f application.jar
 
-FROM builder2 AS build3
+FROM adoptopenjdk/openjdk11:jre-11.0.11_9-alpine@sha256:7efafc8190b160b10fe6371afb0cf46323d35074ac8461126e7a4eccecfbdda7 as builder3
 RUN apk add dumb-init
 
 WORKDIR application
