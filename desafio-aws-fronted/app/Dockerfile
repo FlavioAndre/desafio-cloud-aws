@@ -1,4 +1,4 @@
-FROM  node:alpine@sha256:a0b0b278ee42a452807b49f7a6f81686e44ed3d0d5af82abd883cf8d9a05bdde as build
+FROM  node:alpine@sha256:27f59bdb682924beb511bb54241c4bebc79bfb3d66ad1c116b7ab2a04be38742 as build
 
 ARG REACT_APP_USERPOOL_ID
 ARG REACT_APP_CLIENT_ID
@@ -16,7 +16,7 @@ COPY . .
 RUN npm ci --only=production
 RUN npm run build
 
-FROM nginx:1.20.0-alpine@sha256:6a34c7040988e67430332557c1ff7de65668609cda80203043b634e3c80f265e
+FROM nginx:1.20.0-alpine@sha256:55684c622b7b62045bd4578e402704bdd1923f6ab704f57134e712c2f1da48c8
 WORKDIR /app
 
 RUN apk add dumb-init
