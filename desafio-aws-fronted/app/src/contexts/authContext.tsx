@@ -52,12 +52,13 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
     async function getSessionInfo() {
       try {
         const session: any = await getSession()
+        window.localStorage.setItem('accessToken', `${session.accessToken.jwtToken}`)
+        window.localStorage.setItem('refreshToken', `${session.refreshToken.token}`)
         setSessionInfo({
           accessToken: session.accessToken.jwtToken,
           refreshToken: session.refreshToken.token,
         })
-        window.localStorage.setItem('accessToken', `${session.accessToken.jwtToken}`)
-        window.localStorage.setItem('refreshToken', `${session.refreshToken.token}`)
+        
         await setAttribute({ Name: 'website', Value: 'https://github.com/FlavioAndre/desafio-cloud-aws' })
         const attr: any = await getAttributes()
         setAttrInfo(attr)
@@ -76,7 +77,7 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
   async function signInWithEmail(username: string, password: string) {
     try {
       await cognito.signInWithEmail(username, password)
-      setAuthStatus(AuthStatus.SignedIn)
+      setAuthStatus(AuthStatus.Loading)
     } catch (err) {
       setAuthStatus(AuthStatus.SignedOut)
       throw err
@@ -93,6 +94,9 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
 
   function signOut() {
     cognito.signOut()
+    window.localStorage.setItem('accessToken', '')
+    window.localStorage.setItem('refreshToken', '')
+
     setAuthStatus(AuthStatus.SignedOut)
   }
 

@@ -157,8 +157,6 @@ export default function Home() {
 
   const theme = useTheme();
 
-  const [stack, setStack] = React.useState<string[]>([]);
-
   const [nextToken, setNextToken] = React.useState("");
   
   const [prevToken, setPrevToken] = React.useState("");
@@ -166,6 +164,8 @@ export default function Home() {
   const [isNextToken, setIsNextToken] = React.useState(false);
 
   const [pagina, setPagina] =  React.useState(0);
+
+  const stack : string[] = [];
 
 
   function signOutClicked() {
@@ -178,20 +178,15 @@ export default function Home() {
   function changePasswordClicked() {
     history.push('changepassword')
   }
-
-  const init = () => {
-    if (window.localStorage.getItem('accessToken')) {
-      startProgress();
-      setIsNextToken(false);
-      setNextToken("");
-      setFilesS3([]);
-      loadFiles();
-    }
-  }
+ 
 
   useEffect(() => {
-    setTimeout(init, 1000);
-  }, [])
+    (async () => {
+      if (auth.authStatus===1) {
+        await loadFiles();
+      }
+    })()
+  }, [auth.authStatus])
 
   const stopProgress = () => {
     setProcessing(false)
@@ -233,12 +228,12 @@ export default function Home() {
 
     startProgress()
     DesafioAwsService.deleteFile(file)
-      .then((response) => {
+      .then(() => {
         showMessage("Arquivo excluído com sucesso!", severitySuccess);
         setPagina(0);
         loadFiles();
       })
-      .catch((e) => {
+      .catch((e: any) => {
         showMessage("Error na chamada da Api.", severityError);
         console.log(e);
       }).finally(() => stopProgress());
@@ -252,7 +247,7 @@ export default function Home() {
   const loadFiles = (nextContinuationToken?: any, isBack?: boolean) => {
     startProgress();
     DesafioAwsService.getFiles(nextContinuationToken)
-      .then((response) => {
+      .then((response : any) => {
         if(response.data) {
           setPrevToken(nextToken);
           setIsNextToken(response.data.isTruncated);
@@ -280,7 +275,7 @@ export default function Home() {
     startProgress();
     const email = auth.attrInfo[4].Value;
     DesafioAwsService.requestInteration(email)
-      .then((response) => {
+      .then((response: any) => {
         showMessage(response.data, severitySuccess);
       })
       .catch((e) => {
@@ -332,7 +327,9 @@ export default function Home() {
   const anterior = () => {
     setPagina(pagina - 1);
     let currentToken = stack.pop();
-    if(currentToken === prevToken) currentToken = stack.pop();
+    
+    if(currentToken === prevToken)  currentToken = stack.pop();
+        
     loadFiles(currentToken, sizeStack() > 0);
   }
   
@@ -365,6 +362,7 @@ export default function Home() {
     </Typography>
     {isLogIn() && (
             <div>
+              {auth.attrInfo[3].Value}
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"

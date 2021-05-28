@@ -1,18 +1,23 @@
 version: '3.7'
 services:
     app:
+        restart: always
         container_name: desafio-aws-amcom-app
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile.dev
         volumes:
             - '.:/app'
             - '/app/node_modules'
         ports:
-            - '80:80'
+            - '3001:80'
         env_file:
             - .env
+        stdin_open: true
+        tty: true
         environment:
+            - CHOKIDAR_USEPOLLING=true
+            - COMPOSE_CONVERT_WINDOWS_PATHS=1
             - NODE_ENV=${NODE_ENV}
             - REACT_APP_USERPOOL_ID=${REACT_APP_USERPOOL_ID}
             - REACT_APP_CLIENT_ID=${REACT_APP_CLIENT_ID}
